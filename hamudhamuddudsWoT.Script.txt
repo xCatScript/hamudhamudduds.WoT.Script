@@ -1,0 +1,835 @@
+
+
+
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+
+local Window = Library.CreateLib("hamudhamuddud's WoT script", "GrapeTheme")
+
+local Tab = Window:NewTab("Home 🏠")
+local Section = Tab:NewSection("Welcome To hamudhamudud's WoT Script")
+
+local Tab = Window:NewTab("Main ")
+local Section = Tab:NewSection("Made By Weexploit and hamudhamudud ❤️")
+
+Section:NewButton("Infity Yield", "Executes Infity  Yield", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
+
+
+Section:NewButton("WoF Script", "Executes another WoF Script", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/GujqefPU"))()
+end)
+
+
+Section:NewSlider("Walkspeed", "Walkspeed", 500, 0, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+end)
+
+Section:NewSlider("JumpPower", "SliderInfo", 500, 0, function(J)
+    game.Players.LocalPlayer.Character.Humanoid.JumpHeight = J
+end)
+
+
+
+
+
+
+
+Section:NewButton("Fly Script", "Executes  a Fly Script", function()
+   loadstring(game:HttpGet("https://pastebin.com/raw/d9A5rLAZ"))();
+end)
+
+
+
+Section:NewToggle("Items Esp", "shows the location of items", function(state)
+    getgenv().ESP1 = state
+    if state then
+        ESP();    
+    end
+end)
+
+function ESP()
+    spawn(function()
+    while wait(2) do
+        if not ESP1 then break end
+        for i, v in pairs (game.Workspace:GetDescendants()) do
+            if v.Name == "ProximityPrompt" and v.Parent and v.Parent.Parent.ClassName == "Tool" and v.Parent.Parent.Name and v.Parent.Parent.CanBeDropped == false and v.Parent.Parent.Parent.ClassName == "Workspace" or v.Name == "ProximityPrompt" and v.Parent and v.Parent.Parent.Name == "Egg" and v.Parent.Parent.ClassName == "Tool" and v.Parent.Parent.CanBeDropped == true and v.Parent.Parent.Parent.ClassName == "Workspace" then
+                if not ESP1 then break end
+                if not v.Parent.Parent:FindFirstChild("ESP") then
+                  local BillboardGui = Instance.new("BillboardGui")
+                  local TextLabel = Instance.new("TextLabel")
+                  local Highlight = Instance.new("Highlight")
+                   
+                BillboardGui.Parent = v.Parent.Parent
+                BillboardGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+                BillboardGui.Active = true
+                BillboardGui.AlwaysOnTop = true
+                BillboardGui.LightInfluence = 1.000
+                BillboardGui.Size = UDim2.new(25, 0, 25, 0)
+                BillboardGui.Name = "ESP"
+                 
+                TextLabel.Parent = BillboardGui
+                TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                TextLabel.BackgroundTransparency = 1.000
+                TextLabel.Size = UDim2.new(1, 2, 1, 1)
+                TextLabel.Font = Enum.Font.SourceSans
+                TextLabel.Text = v.Parent.Parent.Name
+                TextLabel.TextColor3 = Color3.fromRGB(0, 159, 58)
+                TextLabel.TextScaled = true
+                TextLabel.TextSize = 14.000
+                TextLabel.TextWrapped = true
+                
+                Highlight.Archivable = true
+                Highlight.Adornee = v.Parent.Parent
+                Highlight.Parent = v.Parent.Parent
+                Highlight.Name = "ESPHighlight"
+                Highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+                Highlight.Enabled = true
+                Highlight.FillColor = Color3.new(0, 255, 0)
+                Highlight.FillTransparency = 0.5
+                Highlight.OutlineColor = Color3.new(255,255,255)
+                Highlight.OutlineTransparency = 0
+                wait(0.3)
+                end
+                end
+            end
+        end
+     end)
+end
+
+
+
+
+
+
+
+
+
+
+Section:NewToggle("InfJump", "ToggleInfo", function(state)
+        getgenv().Infjump = state
+        if state then
+           Jump();
+    end
+end)
+
+function Jump()
+    while wait() do
+      if not Infjump then break end
+      game:GetService("UserInputService").JumpRequest:connect(function()
+      if Infjump then 
+      game:GetService"Players".LocalPlayer.Character:findFirstChildOfClass"Humanoid":ChangeState("Jumping")
+            end
+        end
+   )end
+end
+
+
+Section:NewButton("ServerHop", "ButtonInfo", function()
+    local x = {}
+	for _, v in ipairs(game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100")).data) do
+		if type(v) == "table" and v.maxPlayers > v.playing and v.id ~= game.JobId then
+			x[#x + 1] = v.id
+		end
+	end
+	if #x > 0 then
+		game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, x[math.random(1, #x)])
+    end  
+ end)
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Section:NewToggle("Auto Pick Items", "automatically collects items", function(state)
+    getgenv().AutoPick = state
+    if state then
+        autopick();    
+    end
+end)
+
+function autopick()
+    while wait() do
+        if not AutoPick then break end
+        for i,v in pairs (game.Workspace:GetDescendants()) do
+            if v.Name == "ProximityPrompt" and v.Parent and v.Parent.Parent.ClassName == "Tool" then
+                fireproximityprompt(v.Parent.ProximityPrompt)
+                if not AutoPick then break end
+                wait(0.1)
+            end
+        end 
+    end
+end
+Section:NewToggle("Auto Craft Items", "automatically craft items", function(state)
+    getgenv().AutoCraft = state
+    if state then
+        autocraft();    
+    end
+end)
+
+function autocraft()
+    while wait() do
+        if not AutoCraft then break end
+        for i,v in pairs(game:GetService("Workspace")["The J"]:GetDescendants()) do
+            if v.Name == "ProximityPrompt" and v.Parent then
+                fireproximityprompt(v.Parent.ProximityPrompt)
+                if not AutoCraft then break end
+                wait(0.1)
+            end
+        end
+    end
+end
+ 
+
+Section:NewButton("TP TOOL", "Gives you a teleport tool", function()
+    mouse = game.Players.LocalPlayer:GetMouse()
+tool = Instance.new("Tool")
+tool.RequiresHandle = false
+tool.Name = "hamudhamuddud's  Tp Tool"
+tool.Activated:connect(function()
+local pos = mouse.Hit+Vector3.new(0,2.5,0)
+pos = CFrame.new(pos.X,pos.Y,pos.Z)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
+end)
+tool.Parent = game.Players.LocalPlayer.Backpack
+
+end)
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ local Tab = Window:NewTab("Items")
+
+local Section = Tab:NewSection("Auto Craft")
+
+Section:NewToggle("Empty Cup", "ToggleInfo", function(state)
+    getgenv().AutoCraftEmpy = state
+    if state then
+        autocraftempy();    
+    end
+end)
+
+function autocraftempy()
+    spawn(function()
+        while wait() do
+            if not AutoCraftEmpy then game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace["Safe area"].CFrame break end
+            game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-221.106384, 6.27479219, -225.913025, 1, 0, 0, 0, 1, 0, 0, 0, 1)          
+            fireproximityprompt(game:GetService("Workspace")["The J"]["The hole"].Part.ProximityPrompt)
+            if not AutoCraftEmpy then break end
+        end
+    end)
+end
+
+Section:NewToggle("Blood", "ToggleInfo", function(state)
+    getgenv().AutoCraftBlood = state
+    if state then
+        autocraftblood();    
+    end
+end)
+
+function autocraftblood()
+    spawn(function()
+        while wait() do
+            if not AutoCraftBlood then game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace["Safe area"].CFrame break end
+            game.Players.localPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace")["The J"].Forging.anvilb.Partb.CFrame
+            fireproximityprompt(game:GetService("Workspace")["The J"].Forging.anvilb.Partb.ProximityPrompt)
+            if not AutoCraftBlood then break end
+        end
+    end)
+end
+
+Section:NewToggle("Mysterious", "ToggleInfo", function(state)
+    getgenv().AutoCrafMysterious = state
+    if state then
+        autocrafmysterious();    
+    end
+end)
+
+function autocrafmysterious()
+    spawn(function()
+        while wait() do
+            if not AutoCrafMysterious then game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace["Safe area"].CFrame break end
+            game.Players.localPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace")["The J"].Forging.anvilm.Partm.CFrame           
+            fireproximityprompt(game:GetService("Workspace")["The J"].Forging.anvilm.Partm.ProximityPrompt)
+            if not AutoCrafMysterious then break end
+        end
+    end)
+end
+
+Section:NewToggle("Sorrow", "ToggleInfo", function(state)
+    getgenv().AutoCraftSorrow = state
+    if state then
+        autocraftsorrow();    
+    end
+end)
+
+function autocraftsorrow()
+    spawn(function()
+        while wait() do
+            if not AutoCraftSorrow then game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace["Safe area"].CFrame break end
+            game.Players.localPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace")["The J"].Forging.anvils.Parts.CFrame          
+            fireproximityprompt(game:GetService("Workspace")["The J"].Forging.anvils.Parts.ProximityPrompt)
+            if not AutoCraftSorrow then break end
+        end
+    end)
+end
+
+Section:NewToggle("Nights Essence", "ToggleInfo", function(state)
+    getgenv().AutoCraftNights = state
+    if state then
+        autocraftnights();    
+    end
+end)
+
+function autocraftnights()
+    spawn(function()
+        while wait() do
+            if not AutoCraftNights then game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace["Safe area"].CFrame break end      
+            game.Players.localPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace")["The J"].anviln.Partn.CFrame      
+            fireproximityprompt(game:GetService("Workspace")["The J"].anviln.Partn.ProximityPrompt)
+            if not AutoCraftNights then break end
+        end
+    end)
+end
+
+Section:NewToggle("Flaming", "ToggleInfo", function(state)
+    getgenv().AutoCraftFlaming = state
+    if state then
+        autocraftflaming();    
+    end
+end)
+
+function autocraftflaming()
+    spawn(function()
+        while wait() do
+            if not AutoCraftFlaming then game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace["Safe area"].CFrame break end   
+            game.Players.localPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace")["The J"].anvilf.Partf.CFrame         
+            fireproximityprompt(game:GetService("Workspace")["The J"].anvilf.Partf.ProximityPrompt)
+            if not AutoCraftFlaming then break end
+        end
+    end)
+end
+
+Section:NewToggle("Dark Orb", "ToggleInfo", function(state)
+    getgenv().AutoCraftOrb = state
+    if state then
+        autovraftorb();    
+    end
+end)
+
+function autovraftorb()
+    spawn(function()
+        while wait() do
+            if not AutoCraftOrb then game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace["Safe area"].CFrame break end   
+            game.Players.localPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace")["The J"].OrbCrafter.Parto.CFrame         
+            fireproximityprompt(game:GetService("Workspace")["The J"].OrbCrafter.Parto.ProximityPrompt)
+            if not AutoCraftOrb then break end
+        end
+    end)
+end
+
+local Section = Tab:NewSection("Auto Delete")
+
+Section:NewToggle("Empty Cup", "ToggleInfo", function(state)
+    getgenv().AutoDeleteEmp = state
+    if state then
+        autodeleteemp();    
+    end
+end)
+
+function autodeleteemp()
+    while wait() do
+        if not AutoDeleteEmp then break end
+        pcall(function()
+            for i,v in pairs (game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+                if v.Name == "empty cup" then
+                    v:Destroy()
+                    if not AutoDeleteEmp then break end
+                end
+            end
+        end)
+    end
+end
+
+Section:NewToggle("Blood", "ToggleInfo", function(state)
+    getgenv().AutoDeleteOil = state
+    if state then
+        autodeleteblood();    
+    end
+end)
+
+function autodeleteoil()
+    while wait() do
+        if not AutoDeleteOil then break end
+        pcall(function()
+            for i,v in pairs (game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+                if v.Name == "oil" then
+                    v:Destroy()
+                    if not AutoDeleteOil then break end
+                end
+            end
+        end)
+    end
+end
+
+Section:NewToggle("Water Cup", "ToggleInfo", function(state)
+    getgenv().AutoDeleteWater = state
+    if state then
+        autodeletewater();    
+    end
+end)
+
+function autodeletewater()
+    while wait() do
+        if not AutoDeleteWater then break end
+        pcall(function()
+            for i,v in pairs (game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+                if v.Name == "water cup" then
+                    v:Destroy()
+                    if not AutoDeleteWater then break end
+                end
+            end
+        end)
+    end
+end
+
+Section:NewToggle("Hearty Cup", "ToggleInfo", function(state)
+    getgenv().AutoDeleteHeart = state
+    if state then
+        autodeleteheart();    
+    end
+end)
+
+function autodeleteheart()
+    while wait() do
+        if not AutoDeleteHeart then break end
+        pcall(function()
+            for i,v in pairs (game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+                if v.Name == "hearty cup" then
+                    v:Destroy()
+                    if not AutoDeleteHeart then break end
+                end
+            end
+        end)
+    end
+end
+
+Section:NewToggle("Blood", "ToggleInfo", function(state)
+    getgenv().AutoDeleteBlood = state
+    if state then
+        autodeleteblood();    
+    end
+end)
+
+function autodeleteblood()
+    while wait() do
+        if not AutoDeleteBlood then break end
+        pcall(function()
+            for i,v in pairs (game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+                if v.Name == "blood" then
+                    v:Destroy()
+                    if not AutoDeleteBlood then break end
+                end
+            end
+        end)
+    end
+end
+
+Section:NewToggle("Mysterious", "ToggleInfo", function(state)
+    getgenv().AutoDeleteMysterious = state
+    if state then
+        autodeletemysterious();    
+    end
+end)
+
+function autodeletemysterious()
+    while wait() do
+        if not AutoDeleteMysterious then break end
+        pcall(function()
+            for i,v in pairs (game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+                if v.Name == "mysterious cup" then
+                    v:Destroy()
+                    if not AutoDeleteMysterious then break end
+                end
+            end
+        end)
+    end
+end
+
+Section:NewToggle("Sorrow", "ToggleInfo", function(state)
+    getgenv().AutoDeleteSorrow = state
+    if state then
+        autodeletesorrow();    
+    end
+end)
+
+function autodeletesorrow()
+    while wait() do
+        if not AutoDeleteSorrow then break end
+        pcall(function()
+            for i,v in pairs (game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+                if v.Name == "sorrow" then
+                    v:Destroy()
+                    if not AutoDeleteSorrow then break end
+                end
+            end
+        end)
+    end
+end
+
+Section:NewToggle("Nights Essence", "ToggleInfo", function(state)
+    getgenv().AutoDeleteNights = state
+    if state then
+        autodeletenights();    
+    end
+end)
+
+function autodeletenights()
+    while wait() do
+        if not AutoDeleteNights then break end
+        pcall(function()
+            for i,v in pairs (game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+                if v.Name == "nights essence" then
+                    v:Destroy()
+                    if not AutoDeleteNights then break end
+                end
+            end
+        end)
+    end
+end
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+local Tab = Window:NewTab("Auto Farms ")
+local Section = Tab:NewSection("Auto Farms ")
+
+
+
+Section:NewToggle("Auto Farm Items", "teleport to items and collect them", function(state)
+    getgenv().ItemAutoFarm = state
+    if state then
+        itemautofarm();    
+    end
+end)
+
+function itemautofarm()
+    spawn(function()
+        while wait() do
+            if not ItemAutoFarm then game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace["Safe area"].CFrame break end
+            if not ItemAutoFarm then break end
+            pcall(function()
+                for i,v in pairs (game.Workspace:GetDescendants()) do
+                    if v.Name == "ProximityPrompt" and v.Parent and v.Parent.Parent.ClassName == "Tool" and v.Parent.Parent.CanBeDropped == false and v.Parent.Parent.Parent.ClassName == "Workspace" or v.Name == "ProximityPrompt" and v.Parent and v.Parent.Parent.Name == "Egg" and v.Parent.Parent.ClassName == "Tool" and v.Parent.Parent.CanBeDropped == true and v.Parent.Parent.Parent.ClassName == "Workspace" then
+                        if not ItemAutoFarm then break end
+                        game.Players.localPlayer.Character.HumanoidRootPart.CFrame = v.Parent.CFrame + Vector3.new(0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                        fireproximityprompt(v.Parent.ProximityPrompt)
+                        fireproximityprompt(v.Parent.ProximityPrompt)   
+                        wait(0.15) 
+                        fireproximityprompt(v.Parent.ProximityPrompt)
+                        wait(0.15)
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0.0573774539, -487.000092, -0.0554556288, 0.999999642, 5.61983491e-08, -0.000878473278, -5.62076039e-08, 1, -1.05132543e-08, 0.000878473278, 1.05626272e-08, 0.999999642)
+                        wait(0.1)
+                    end
+                end
+            end 
+        )end
+    end)        
+end
+
+Section:NewToggle("Easter Eggs Only", "teleport to Easters Egg and collect them", function(state)
+    getgenv().OnlyEastersEgg= state
+    if state then
+        onlyeastersegg();    
+    end
+end)
+
+function onlyeastersegg()
+    spawn(function()
+        while wait() do
+            if not OnlyEastersEgg then game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace["Safe area"].CFrame break end
+            if not OnlyEastersEgg then break end
+            pcall(function()
+                for i,v in pairs (game.Workspace:GetDescendants()) do
+                    if v.Name == "ProximityPrompt" and v.Parent and v.Parent.Parent.Name == "Egg" and v.Parent.Parent.ClassName == "Tool" and v.Parent.Parent.CanBeDropped == true and v.Parent.Parent.Parent.ClassName == "Workspace" then
+                        if not OnlyEastersEgg then break end
+                        game.Players.localPlayer.Character.HumanoidRootPart.CFrame = v.Parent.CFrame + Vector3.new(0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                        fireproximityprompt(v.Parent.ProximityPrompt)
+                        fireproximityprompt(v.Parent.ProximityPrompt)   
+                        wait(0.15) 
+                        fireproximityprompt(v.Parent.ProximityPrompt)
+                        wait(0.15)
+                        else
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0.0573774539, -487.000092, -0.0554556288, 0.999999642, 5.61983491e-08, -0.000878473278, -5.62076039e-08, 1, -1.05132543e-08, 0.000878473278, 1.05626272e-08, 0.999999642)
+                    end
+                end
+            end 
+        )end
+    end)        
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+local Tab = Window:NewTab("Credits 📪")
+local Section = Tab:NewSection("Scripted By Weexploit")
+local Section = Tab:NewSection("Library by Kavo")
+local Section = Tab:NewSection("Tester hamudhamuddud")
+local Section = Tab:NewSection("Idea hamudhamuddud")
+
+
+Section:NewKeybind("Toggle GUI", "Toggle GUI", Enum.KeyCode.X, function()
+	Library:ToggleUI()
+end)
